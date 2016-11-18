@@ -83,9 +83,9 @@ Interaction should look like the current iOS Version of the MyToys App available
 
 ## Requirements
 
-- Your code must be written in Swift 2.x
+- Your code must be written in Swift 3
 - Minimum supported OS must be iOS9
-- Use Xcode 7.3.1
+- Use Xcode 8.x
 - Write tests
 - It must compile and run in the iPhone Simulator
 - Write a paragraph or two on how you approached the work and what you considered during development
