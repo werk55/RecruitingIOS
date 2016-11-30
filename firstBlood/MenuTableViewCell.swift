@@ -32,15 +32,22 @@ class MenuTableViewCell: UITableViewCell {
         if (itemData?.children != nil)     { self.accessoryType = UITableViewCellAccessoryType.disclosureIndicator}
         if (itemData?.itemUrl != nil)     { self.accessoryType = UITableViewCellAccessoryType.detailButton}
         
-        if (itemData?.itemType == "section")
+        if let strType = itemData?.itemType
         {
+        switch (strType)
+        {
+        case "section":
             self.selectionStyle =  UITableViewCellSelectionStyle.none
             self.contentView.backgroundColor=UIColor.gray
             self.accessoryType = UITableViewCellAccessoryType.none
-        }else
-        {
+            self.isUserInteractionEnabled = false
+            
+        default:
             self.contentView.backgroundColor=UIColor.white
             self.selectionStyle =  UITableViewCellSelectionStyle.default
+            self.isUserInteractionEnabled = true
+        }
+        
         }
     }
     

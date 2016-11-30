@@ -11,8 +11,6 @@
 
 import UIKit
 
-//extension Menu{
-
 class MenuTableViewController: UITableViewController {
 
     var dataController: MenuDataControllerProtocol?  //TODO: use some protocol instead
@@ -24,7 +22,10 @@ class MenuTableViewController: UITableViewController {
 
         //our current config
         dataController = appConfig.dataLayer
-
+        let backBtn = UIBarButtonItem()
+        backBtn.title=""
+        self.navigationItem.backBarButtonItem = backBtn
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,13 +52,22 @@ class MenuTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        let numberOfRows = rows?.count
+        return (numberOfRows ?? 0)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let numberOfRows = rows?.count
-        return (numberOfRows ?? 0)
+        var numberOfRows = 1
+        
+        if let data = (rows?[section]) as Menu.MenuItem!
+        {
+            if (data.itemType=="section"){
+                numberOfRows = numberOfRows + (data.children?.count)!
+            }
+        }
+        
+        return numberOfRows
     }
 
     
@@ -65,49 +75,21 @@ class MenuTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "kMenuTableViewCell", for: indexPath) as! MenuTableViewCell
 
         // Configure the cell...
-        if let data = (rows?[indexPath.row])  as Menu.MenuItem! {
+        if let data = (rows?[indexPath.section])  as Menu.MenuItem! {
             cell.setData(data: data )
+            
+            if (indexPath.row>0)
+            {
+                if let rowData = data.children?[indexPath.row-1]{
+                    cell.setData(data: rowData )
+                }
+            }
+            
+            
         }
         
         return cell
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
@@ -119,11 +101,36 @@ class MenuTableViewController: UITableViewController {
             
             let selectedIndex = self.tableView.indexPath(for: sender as! UITableViewCell)
 
-            selectedItem = rows?[(selectedIndex?.row)!]
+            selectedItem = rows?[(selectedIndex?.section)!]
+            
+            if ((selectedIndex?.row)!>0)
+            {
+                if let rowData = selectedItem?.children?[(selectedIndex?.row)!-1]{
+                   selectedItem = rowData
+                }
+            }
+            
             controller.rows = selectedItem?.children
             controller.title = selectedItem?.itemLabel
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String,
+                                     sender: Any?) -> Bool {
+
+        if let knowning = sender as! MenuTableViewCell?
+        {
+        let a = knowning.itemData
+            switch ((a?.itemType)! as String) //TODO - it looks odd
+            {
+            case "link":
+                //TODO: we want to emit something in this case
+                return false
+            default:
+                return true
+            }
+        }
+        
+        return true
+    }
 }
-//}
