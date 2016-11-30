@@ -19,6 +19,7 @@ extension Menu{
         
         var menuItems :[MenuItem]?
         
+        // MARK: fetching
        // public typealias menuListHandler = ([Menu.MenuItem]?)->()
         //lets fetch our menu
         func menuItems(operation:  @escaping menuListHandler)

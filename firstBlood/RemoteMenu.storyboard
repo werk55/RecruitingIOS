@@ -63,9 +63,10 @@
         <scene sceneID="JK8-2g-3lR">
             <objects>
                 <navigationController storyboardIdentifier="kMenuRoot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="09y-iR-hJj" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TGP-Cx-ZsH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TGP-Cx-ZsH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.84665197130000003" blue="0.01258253306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="PsJ-JJ-Nng" kind="relationship" relationship="rootViewController" id="mFN-is-phe"/>

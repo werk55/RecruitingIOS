@@ -30,7 +30,7 @@ class MenuTableViewCell: UITableViewCell {
         itemData = data
         if let text = itemData?.itemLabel { enrichedTextLabel?.text=text} //set the text
         if (itemData?.children != nil)     { self.accessoryType = UITableViewCellAccessoryType.disclosureIndicator}
-        if (itemData?.itemUrl != nil)     { self.accessoryType = UITableViewCellAccessoryType.detailButton}
+        if (itemData?.itemUrl != nil)     { self.accessoryType = UITableViewCellAccessoryType.none}
         
         if let strType = itemData?.itemType
         {
@@ -38,14 +38,17 @@ class MenuTableViewCell: UITableViewCell {
         {
         case "section":
             self.selectionStyle =  UITableViewCellSelectionStyle.none
-            self.contentView.backgroundColor=UIColor.gray
+            self.contentView.backgroundColor=UIColor.lightGray
             self.accessoryType = UITableViewCellAccessoryType.none
             self.isUserInteractionEnabled = false
+            self.enrichedTextLabel?.font=UIFont.boldSystemFont(ofSize: 12)
             
         default:
             self.contentView.backgroundColor=UIColor.white
             self.selectionStyle =  UITableViewCellSelectionStyle.default
             self.isUserInteractionEnabled = true
+            self.enrichedTextLabel?.font=UIFont.systemFont(ofSize: 12)
+
         }
         
         }

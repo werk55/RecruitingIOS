@@ -11,4 +11,10 @@ import Foundation
 struct Menu
 {
 //name space
+    
+}
+
+
+extension Notification.Name {
+    static let openUrlNotification = Notification.Name("openUrlNotification")
 }
