@@ -10,14 +10,14 @@ import UIKit
 
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet var webView: UIWebView?
     
     //MARK: observers
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         
-         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handle(withNotification:)), name: .openUrlNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handle(withNotification:)), name: .openUrlNotification, object: nil)
     }
     
     deinit {
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
- 
+        
         let menuBtn = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(handleMenu))
         
         //TODO: check if this is working
@@ -39,8 +39,8 @@ class ViewController: UIViewController {
         {
             self.navigationItem.leftBarButtonItems = [menuBtn]
         }
-
-      //s  self.navigationItem.leftBarButtonItem = menuBtn
+        
+        //s  self.navigationItem.leftBarButtonItem = menuBtn
         
     }
     
@@ -55,13 +55,13 @@ class ViewController: UIViewController {
         self.present(viewController, animated: true, completion: nil)
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
     @IBAction func launchMenu(sender: UIButton)
     {
         
@@ -76,21 +76,25 @@ class ViewController: UIViewController {
         
         if let menuItem = notification.object as! Menu.MenuItem?
         {
-        DispatchQueue.main.async {
-            
-            self.dismiss(animated: true, completion: nil)
-            
-            let loadRequest = URLRequest(url: URL(string: menuItem.itemUrl!)!)
-            self.webView?.loadRequest(loadRequest)
+            DispatchQueue.main.async {
+                
+                self.dismiss(animated: true, completion: nil)
+                
+                
+                switch (menuItem.itemType)
+                {
+                case "external-link":
+                    UIApplication.shared.openURL(URL(string: menuItem.itemUrl!)!) //TODO warn 10.x
+                    
+                default:
+                    let loadRequest = URLRequest(url: URL(string: menuItem.itemUrl!)!)
+                    self.webView?.loadRequest(loadRequest)
+                }
             }
+            
+            print("RECEIVED SPECIFIC NOTIFICATION: \(notification)")
         }
-        
-        print("RECEIVED SPECIFIC NOTIFICATION: \(notification)")
     }
-    
-    /*
- 
-     
- */
+
 }
 

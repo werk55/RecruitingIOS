@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //prefetch some menu data
+        appConfig.dataLayer.menuItems(operation: {(items: [Menu.MenuItem]?)->() in
+            //NOP
+        })
+        
         return true
     }
 

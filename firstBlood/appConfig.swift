@@ -10,5 +10,5 @@ import Foundation
 
 struct appConfig
 {
-static let dataLayer = Menu.MenuDataController()
+    static let dataLayer = Menu.MenuDataController()
 }

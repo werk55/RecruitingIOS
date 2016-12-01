@@ -134,6 +134,10 @@ class MenuTableViewController: UITableViewController {
                 //let somebody open this url
                 NotificationCenter.default.post(name: .openUrlNotification, object: item)
                 return false
+            case "external-link":
+                //let somebody open this url
+                NotificationCenter.default.post(name: .openUrlNotification, object: item)
+                return false
             default:
                 return true
             }
