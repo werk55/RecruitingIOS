@@ -36,7 +36,8 @@ class MenuTableViewCell: UITableViewCell {
         {
         switch (strType)
         {
-        case "section":
+
+        case Menu.itemType.section.rawValue:
             self.selectionStyle =  UITableViewCellSelectionStyle.none
             self.contentView.backgroundColor=UIColor.lightGray
             self.accessoryType = UITableViewCellAccessoryType.none

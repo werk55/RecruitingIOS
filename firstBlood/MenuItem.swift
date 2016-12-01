@@ -11,6 +11,13 @@ import ObjectMapper
 
 extension Menu
 {
+    enum itemType: String {
+        case externalLink = "external-link"
+        case link = "link"
+        case section = "section"
+        case node = "node"
+    }
+
 class MenuItem: Mappable {
     var itemType = ""
     var itemLabel = ""

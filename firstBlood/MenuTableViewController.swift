@@ -72,7 +72,7 @@ class MenuTableViewController: UITableViewController {
         
         if let data = (rows?[section]) as Menu.MenuItem!
         {
-            if (data.itemType=="section"){
+            if (data.itemType==Menu.itemType.section.rawValue){
                 numberOfRows = numberOfRows + (data.children?.count)!
             }
         }
@@ -130,11 +130,11 @@ class MenuTableViewController: UITableViewController {
             let item = knowning.itemData
             switch ((item?.itemType)! as String) //TODO - it looks odd
             {
-            case "link":
+            case  Menu.itemType.link.rawValue:
                 //let somebody open this url
                 NotificationCenter.default.post(name: .openUrlNotification, object: item)
                 return false
-            case "external-link":
+            case  Menu.itemType.externalLink.rawValue:
                 //let somebody open this url
                 NotificationCenter.default.post(name: .openUrlNotification, object: item)
                 return false

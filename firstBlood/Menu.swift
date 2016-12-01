@@ -14,7 +14,6 @@ struct Menu
     
 }
 
-
 extension Notification.Name {
     static let openUrlNotification = Notification.Name("openUrlNotification")
 }
