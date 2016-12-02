@@ -49,7 +49,6 @@ class MenuTableViewCell: UITableViewCell {
             self.selectionStyle =  UITableViewCellSelectionStyle.default
             self.isUserInteractionEnabled = true
             self.enrichedTextLabel?.font=UIFont.systemFont(ofSize: 12)
-
         }
         
         }

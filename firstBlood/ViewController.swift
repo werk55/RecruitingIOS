@@ -67,14 +67,11 @@ class ViewController: UIViewController {
     
     @objc func handleMenu()->()
     {
-        let viewController:UIViewController = UIStoryboard(name: "RemoteMenu", bundle: nil).instantiateViewController(withIdentifier: "kMenuRoot") as UIViewController
-        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
-        
-        viewController.modalPresentationStyle = UIModalPresentationStyle.popover
-        
-        
-        self.present(viewController, animated: true, completion: nil)
-    }
+        if let viewController:UIViewController = appConfig.configuration.resolve(UIViewController.self,name:"AppMenu")
+        {
+            viewController.modalPresentationStyle = UIModalPresentationStyle.popover
+            self.present(viewController, animated: true, completion: nil)        }
+        }
     
     
     override func didReceiveMemoryWarning() {
@@ -85,15 +82,10 @@ class ViewController: UIViewController {
     //MARK: show menu
     @IBAction func launchMenu(sender: UIButton)
     {
-        
-        let viewController:UIViewController = UIStoryboard(name: "RemoteMenu", bundle: nil).instantiateViewController(withIdentifier: "kMenuRoot") as UIViewController
-        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
-        
-        self.present(viewController, animated: false, completion: nil)
-        
+        if let viewController:UIViewController = appConfig.configuration.resolve(UIViewController.self,name:"AppMenu")
+        {
+            self.present(viewController, animated: false, completion: nil)
+        }
     }
-    
-
-
 }
 

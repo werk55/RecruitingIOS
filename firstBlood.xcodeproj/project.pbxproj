@@ -132,12 +132,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EF60D5091DF008EA0026170F /* data */ = {
+			isa = PBXGroup;
+			children = (
+				EF7DC8341DEF280400902519 /* MenuDataProtocol.swift */,
+				EF7DC8261DEF0F0D00902519 /* MenuDataController.swift */,
+				EF7DC8301DEF241E00902519 /* model */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
 		EF7DC8231DEF0E7B00902519 /* menu */ = {
 			isa = PBXGroup;
 			children = (
+				EF60D5091DF008EA0026170F /* data */,
 				EF7DC8361DEF2F9400902519 /* configs */,
 				EF7DC8311DEF242E00902519 /* view */,
-				EF7DC8301DEF241E00902519 /* model */,
 				EF7DC8281DEF103700902519 /* Menu.swift */,
 			);
 			name = menu;
@@ -146,8 +156,6 @@
 		EF7DC8301DEF241E00902519 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				EF7DC8341DEF280400902519 /* MenuDataProtocol.swift */,
-				EF7DC8261DEF0F0D00902519 /* MenuDataController.swift */,
 				EF7DC82C1DEF18D100902519 /* MenuItem.swift */,
 				EF7DC82E1DEF1F9100902519 /* MenuItemRoot.swift */,
 			);
@@ -168,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				EF7DC82A1DEF10F500902519 /* EPConfig.swift */,
-				EF7DC8371DEF2FAC00902519 /* appConfig.swift */,
 			);
 			name = configs;
 			sourceTree = "<group>";
@@ -198,6 +205,7 @@
 		EFEAC6CB1DE5F24B00649427 /* firstBlood */ = {
 			isa = PBXGroup;
 			children = (
+				EF7DC8371DEF2FAC00902519 /* appConfig.swift */,
 				EF7DC8231DEF0E7B00902519 /* menu */,
 				EFEAC6CC1DE5F24B00649427 /* AppDelegate.swift */,
 				EFEAC6CE1DE5F24B00649427 /* ViewController.swift */,

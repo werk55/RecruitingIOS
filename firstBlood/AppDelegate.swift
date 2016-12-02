@@ -18,9 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //prefetch some menu data
-        appConfig.dataLayer.menuItems(operation: {(items: [Menu.MenuItem]?)->() in
-            //NOP
-        })
+        
+        if let menuData = appConfig.configuration.resolve(MenuDataControllerProtocol.self)
+        {
+            menuData.menuItems(operation: {(items: [Menu.MenuItem]?)->() in
+                //NOP
+            })
+        }
         
         return true
     }
