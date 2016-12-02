@@ -7,24 +7,46 @@
 //
 
 import UIKit
+import Swinject
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var container: Container = {
+        let container = Container()
+        container.register(MenuDataControllerProtocol.self) { _ in Menu.MenuDataController() }
+        
+        container.registerForStoryboard(MenuTableViewController.self) { r, c in
+            c.dataController = r.resolve(MenuDataControllerProtocol.self)
+        }
+        
+        //! menu is in another storyboard 
+        let secondStoryboard = SwinjectStoryboard.create(name: "RemoteMenu", bundle: nil, container: container)
+        
+        let menuViewController:UIViewController = secondStoryboard.instantiateViewController(withIdentifier: "kMenuRoot") as UIViewController
+        
+        container.register(UIViewController.self,name:"AppMenu") { _ in menuViewController}
+        
+
+        container.registerForStoryboard(ViewController.self) { r, c in
+            c.menuViewController = r.resolve(UIViewController.self,name:"AppMenu")
+        }
+        
+        return container
+    }()
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.makeKeyAndVisible()
+        self.window = window
         
-        //prefetch some menu data
-        
-        if let menuData = appConfig.configuration.resolve(MenuDataControllerProtocol.self)
-        {
-            menuData.menuItems(operation: {(items: [Menu.MenuItem]?)->() in
-                //NOP
-            })
-        }
+        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: container)
+        window.rootViewController = storyboard.instantiateInitialViewController()
         
         return true
     }

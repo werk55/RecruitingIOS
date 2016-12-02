@@ -20,11 +20,7 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //our current config
-       // dataController = appConfig.dataLayer
-        
-        dataController = appConfig.configuration.resolve(MenuDataControllerProtocol.self)
-        
+
         let backBtn = UIBarButtonItem()
         backBtn.title=""
         self.navigationItem.backBarButtonItem = backBtn

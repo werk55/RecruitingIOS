@@ -10,6 +10,7 @@ target 'firstBlood' do
   pod 'ObjectMapper' , '~> 2.2.1'
   pod 'AlamofireObjectMapper'
   pod 'Swinject', '2.0.0-beta.2'
+  pod 'SwinjectStoryboard', '1.0.0-beta.2'
 
   target 'firstBloodTests' do
     inherit! :search_paths

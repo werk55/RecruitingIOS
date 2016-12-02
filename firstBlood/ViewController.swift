@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var webView: UIWebView?
+    var menuViewController: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,6 @@ class ViewController: UIViewController {
         {
             self.navigationItem.leftBarButtonItems = [menuBtn]
         }
-                
     }
     
     //MARK: observers
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
     
     @objc func handleMenu()->()
     {
-        if let viewController:UIViewController = appConfig.configuration.resolve(UIViewController.self,name:"AppMenu")
+        if let viewController:UIViewController = menuViewController //appConfig.configuration.resolve(UIViewController.self,name:"AppMenu")
         {
             viewController.modalPresentationStyle = UIModalPresentationStyle.popover
             self.present(viewController, animated: true, completion: nil)        }
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
     //MARK: show menu
     @IBAction func launchMenu(sender: UIButton)
     {
-        if let viewController:UIViewController = appConfig.configuration.resolve(UIViewController.self,name:"AppMenu")
+        if let viewController:UIViewController = menuViewController // appConfig.configuration.resolve(UIViewController.self,name:"AppMenu")
         {
             self.present(viewController, animated: false, completion: nil)
         }
